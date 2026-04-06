@@ -8,9 +8,9 @@ Powered by [Upptime](https://upptime.js.org), monitoring runs every 5 minutes vi
 
 ## Monitored Endpoints
 
-| Service | URL |
-|---------|-----|
-| Cerul API | `api.cerul.ai` |
-| Cerul Website | `cerul.ai` |
+| Service          | URL                |
+| ---------------- | ------------------ |
+| Cerul API        | `api.cerul.ai`     |
+| Cerul Website    | `cerul.ai`         |
 | Cerul MCP Server | `api.cerul.ai/mcp` |
-| Cerul Docs | `cerul.ai/docs` |
+| Cerul Docs       | `cerul.ai/docs`    |
