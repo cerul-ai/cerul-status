@@ -16,8 +16,33 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           command: site
-      - uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./__sapper__/export
-          cname: status.cerul.ai
+      - name: Find and deploy built site
+        run: |
+          # Find where sapper exported
+          EXPORT_DIR=$(find . -path '*/__sapper__/export' -type d 2>/dev/null | head -1)
+          if [ -z "$EXPORT_DIR" ]; then
+            echo "No __sapper__/export found, listing directories:"
+            find . -name 'export' -type d 2>/dev/null
+            find . -name 'index.html' 2>/dev/null | head -5
+            exit 1
+          fi
+          echo "Found export at: $EXPORT_DIR"
+          ls -la "$EXPORT_DIR"
+
+          # Deploy to gh-pages
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          # Copy export to temp
+          cp -r "$EXPORT_DIR" /tmp/site-export
+          echo "status.cerul.ai" > /tmp/site-export/CNAME
+          touch /tmp/site-export/.nojekyll
+
+          # Switch to gh-pages
+          git checkout --orphan gh-pages-new
+          git rm -rf . 2>/dev/null || true
+          cp -r /tmp/site-export/* .
+          cp /tmp/site-export/.nojekyll .
+          git add -A
+          git commit -m "Deploy status page"
+          git push origin gh-pages-new:gh-pages --force
