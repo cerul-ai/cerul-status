@@ -16,3 +16,8 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           command: site
+      - uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./__sapper__/export
+          cname: status.cerul.ai
