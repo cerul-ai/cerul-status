@@ -1,0 +1,58 @@
+owner: cerul-ai
+repo: cerul-status
+
+sites:
+  - name: Cerul API
+    url: https://api.cerul.ai/v1/usage
+    headers:
+      - "Authorization: Bearer $CERUL_API_KEY"
+    expectedStatusCodes:
+      - 200
+      - 401
+
+  - name: Cerul Website
+    url: https://cerul.ai
+    expectedStatusCodes:
+      - 200
+
+  - name: Cerul MCP Server
+    url: https://api.cerul.ai/mcp
+    method: OPTIONS
+    expectedStatusCodes:
+      - 200
+      - 204
+      - 405
+
+  - name: Cerul Docs
+    url: https://cerul.ai/docs
+    expectedStatusCodes:
+      - 200
+
+status-website:
+  cname: status.cerul.ai
+  name: Cerul Status
+  theme: dark
+  logoUrl: https://github.com/cerul-ai/cerul/blob/main/assets/logo.png?raw=true
+  navbar:
+    - title: Homepage
+      href: https://cerul.ai
+    - title: GitHub
+      href: https://github.com/cerul-ai/cerul
+
+i18n:
+  activeIncidents: Active incidents
+  allSystemsOperational: All systems operational
+  incidentReport: Incident report for {0}
+  activeIncidentSummary: "{0} active incident(s)"
+
+workflowSchedule:
+  graphs: "0 0 * * *"
+  responseTime: "0 23 * * *"
+  staticSite: "0 1 * * *"
+  summary: "0 0 * * *"
+  updateTemplate: "0 0 * * *"
+  updates: "*/5 * * * *"
+
+commitMessages:
+  statusChange: "$EMOJI $SITE_NAME is $STATUS ($RESPONSE_CODE in $RESPONSE_TIME ms)"
+  commitSummaryTitle: "Status summary for $MONTH/$YEAR"
