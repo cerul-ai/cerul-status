@@ -1,6 +1,6 @@
 # Cerul Status
 
-Public status page for [Cerul](https://cerul.ai) — the video search layer for AI agents.
+Public status page for [Cerul](https://cerul.ai) — where video becomes citable.
 
 **Live at:** [status.cerul.ai](https://status.cerul.ai)
 
